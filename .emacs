@@ -109,7 +109,7 @@
  '(custom-enabled-themes (quote (pastel-gray)))
  '(custom-safe-themes
    (quote
-    ("0bd65a9eb283036c2fa53ad6fdb1c4b356f052b23ca957c44351cd2c7f723b1d" "e4237a6d99b3861a037f7ef67f751e785ebf59a5ef5eb6d8adb2c88c3ce64cb7" default))))
+    ("0bd65a9eb283036c2fa53ad6fdb1c4b356f052b23ca957c44351cd2c7f723b1d" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
