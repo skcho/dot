@@ -22,32 +22,34 @@ selection   | 181 213 255 | #B5D5FF
 
 ## Emacs
 
-foreground-color: #E5E5E5
-background-color: #1A1A1A
-font-lock-warning-face : #D33651
-font-lock-function-name-face: #2B75BC
-font-lock-variable-name-face: #E5E5E5
-font-lock-keyword-face: #FFE679
-font-lock-comment-face: #6DBCDB
-font-lock-comment-delimiter-face: #6DBCDB
-font-lock-type-face: #437356
-font-lock-constant-face: #E318A8
-font-lock-builtin-face: #E5E5E5
-font-lock-string-face: #D33651
-font-lock-negation-char-face: #E5E5E5
-region: #555555
-dired-directory: #2B75BC
-dired-symlink: #6DBCDB
-eshell-prompt: #62876A
-eshell-ls-readonly: #E5E5E5
-eshell-ls-directory: #2B75BC
-eshell-ls-executable: #62876A
-eshell-ls-archive: #D33651
-eshell-ls-symlink: #6DBCDB
+face name                        | color(#)
+---------------------------------|---------
+foreground-color                 | #E5E5E5
+background-color                 | #1A1A1A
+font-lock-warning-face           | #D33651
+font-lock-function-name-face     | #2B75BC
+font-lock-variable-name-face     | #E5E5E5
+font-lock-keyword-face           | #FFE679
+font-lock-comment-face           | #6DBCDB
+font-lock-comment-delimiter-face | #6DBCDB
+font-lock-type-face              | #437356
+font-lock-constant-face          | #E318A8
+font-lock-builtin-face           | #E5E5E5
+font-lock-string-face            | #D33651
+font-lock-negation-char-face     | #E5E5E5
+region                           | #555555
+dired-directory                  | #2B75BC
+dired-symlink                    | #6DBCDB
+eshell-prompt                    | #62876A
+eshell-ls-readonly               | #E5E5E5
+eshell-ls-directory              | #2B75BC
+eshell-ls-executable             | #62876A
+eshell-ls-archive                | #D33651
+eshell-ls-symlink                | #6DBCDB
 
 ### How to apply pastel-gray-theme
 
-1. Copy `pastel-gray-theme.el` to `~/.emacs.d/`
+1. Copy `[pastel-gray-theme.el]()` to `~/.emacs.d/`
 2. `M-x` `customize-themes`
 3. Select `pastel-gray`
 4. `C-x` `C-s` (This will edit `~/.emacs` as below.)
