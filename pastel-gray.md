@@ -52,7 +52,7 @@ eshell-ls-symlink                | #6DBCDB
 1. Copy [`pastel-gray-theme.el`](pastel-gray-theme.el) to `~/.emacs.d/`
 2. `M-x` `customize-themes`
 3. Select `pastel-gray`
-4. `C-x` `C-s` (This will edit `~/.emacs` as below.)
+4. `C-x` `C-s` (This will edit `~/.emacs`.)
 
 ### How to modify the theme
 
