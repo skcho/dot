@@ -54,13 +54,13 @@ eshell-ls-symlink                | #6DBCDB
 3. Select `pastel-gray`
 4. `C-x` `C-s` (This will edit `~/.emacs` as below.)
 
-### How to modify theme
+### How to modify the theme
 
 1. Get face names by `C-u` `C-x` `=`
 2. `M-x` `customize-themes`
-3. Type `?` on pastel-gray
+3. Type `?` on `pastel-gray`
 4. Click the `customize` button
 
 *****
 
-by skcho, Dec. 2013.
+By skcho, Dec 2013
