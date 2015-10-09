@@ -1,5 +1,3 @@
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 (defun select-next-window ()
   (interactive)
   (select-window (next-window (selected-window))))
@@ -98,6 +96,11 @@
 ;; See https://marmalade-repo.org/
 
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+;; Package: ocp-indent
+
+(add-to-list 'load-path "~/.opam/4.02.1/share/emacs/site-lisp")
+(require 'ocp-indent)
 
 ;; CAUTION: Do not edit the following code.
 
