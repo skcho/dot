@@ -1,3 +1,5 @@
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (defun select-next-window ()
   (interactive)
   (select-window (next-window (selected-window))))
