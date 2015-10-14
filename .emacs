@@ -104,6 +104,8 @@
 (add-to-list 'load-path "~/.opam/4.02.1/share/emacs/site-lisp")
 (require 'ocp-indent)
 
+(load-file "~/tool/ProofGeneral/generic/proof-site.el")
+
 ;; CAUTION: Do not edit the following code.
 
 (custom-set-variables
