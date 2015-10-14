@@ -99,10 +99,25 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; Package: ocp-indent
+;; Package: ocp-indent & merlin
+;; They are sharing load-path.
 
 (add-to-list 'load-path "~/.opam/4.02.1/share/emacs/site-lisp")
 (require 'ocp-indent)
+(require 'merlin)
+(add-hook 'tuareg-mode-hook 'merlin-mode t)
+(setq merlin-use-auto-complete-mode 'easy)
+
+;; Package: auto-complete
+;; See https://marmalade-repo.org/
+;; See also
+;; http://stackoverflow.com/questions/12053598/loading-packages-installed-through-package-el-in-emacs24
+;; to be sure why the initialization hooks.
+
+(add-hook 'after-init-hook 'auto-complete-init-hook)
+(defun auto-complete-init-hook ()
+  (require 'auto-complete-config)
+  (ac-config-default))
 
 (load-file "~/tool/ProofGeneral/generic/proof-site.el")
 
