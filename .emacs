@@ -63,6 +63,9 @@
 
 (setq TeX-PDF-mode t)
 
+;; Remove a key map of [C-tab] in magit-mode.el for using it as a
+;; window selection in magit-mode.
+
 (global-set-key [(ctrl tab)] 'select-next-window)
 (global-set-key [(ctrl shift iso-lefttab)] 'select-previous-window)
 (global-set-key [(ctrl shift kp-tab)] 'select-previous-window)
