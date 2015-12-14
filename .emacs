@@ -54,7 +54,8 @@
 (column-number-mode t)
 (tool-bar-mode -1)
 
-(setq x-alt-keysym 'meta)		; Command as meta in Mac
+(when (eq system-type 'darwin)		; Mac specific settings
+  (setq mac-command-modifier 'meta))
 
 (global-font-lock-mode 1)		; Syntax highlight
 (show-paren-mode 1)
