@@ -54,6 +54,7 @@
 (column-number-mode t)
 (tool-bar-mode -1)
 
+(setq x-alt-keysym 'meta)
 (when (eq system-type 'darwin)		; Mac specific settings
   (setq mac-command-modifier 'meta))
 
