@@ -107,7 +107,8 @@
 ;; Package: ocp-indent & merlin
 ;; They are sharing load-path.
 
-(add-to-list 'load-path "~/.opam/4.02.1/share/emacs/site-lisp")
+;; TODO: generalize the path
+(add-to-list 'load-path "~/.opam/4.01.0/share/emacs/site-lisp")
 (require 'ocp-indent)
 (require 'merlin)
 (add-hook 'tuareg-mode-hook 'merlin-mode t)
