@@ -108,11 +108,13 @@
 ;; They are sharing load-path.
 
 ;; TODO: generalize the path
-(add-to-list 'load-path "~/.opam/4.01.0/share/emacs/site-lisp")
+(add-to-list 'load-path "~/.opam/4.02.3/share/emacs/site-lisp")
 (require 'ocp-indent)
 (require 'merlin)
 (add-hook 'tuareg-mode-hook 'merlin-mode t)
+(add-hook 'caml-mode-hook 'merlin-mode t)
 (setq merlin-use-auto-complete-mode 'easy)
+(setq merlin-command 'opam)
 
 ;; Package: auto-complete
 ;; See https://marmalade-repo.org/
