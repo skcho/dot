@@ -128,27 +128,5 @@
 
 (load-file "~/tool/ProofGeneral/generic/proof-site.el")
 
-;; CAUTION: Do not edit the following code.
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(TeX-view-program-selection
-   (quote
-    (((output-dvi style-pstricks)
-      "dvips and gv")
-     (output-dvi "xdvi")
-     (output-pdf "xpdf")
-     (output-html "xdg-open"))))
- '(custom-enabled-themes (quote (pastel-gray)))
- '(custom-safe-themes
-   (quote
-    ("fdfe4da783018150c940b8738187b4bb9a2bfc5d6adc0ca15a01ec9c3fb2a7bd" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'dracula t)

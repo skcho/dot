@@ -5,5 +5,5 @@ dot
   those in real directories and the repository, e.g.,
 
     ln dot/.emacs ~/
-    ln dot/pastel-gray-theme.el ~/.emacs.d/
     ln dot/key_repeat ~/tool/
+    ln dracula-theme/emacs/dracula-theme.el .emacs.d/themes/
