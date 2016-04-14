@@ -55,7 +55,7 @@
 (tool-bar-mode -1)
 
 (setq x-alt-keysym 'meta)
-(when (eq system-type 'darwin)		; Mac specific settings
+(when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 
 (global-font-lock-mode 1)		; Syntax highlight
@@ -88,7 +88,8 @@
   (global-unset-key (kbd "C-z"))
   (global-unset-key [(control x)(control z)]))
 
-(when window-system
+(if (eq system-type 'darwin)
+    (set-font-size 18)
   (set-font-size 14))
 
 ;; Package: multiple-cursors
@@ -107,8 +108,8 @@
 ;; Package: ocp-indent & merlin
 ;; They are sharing load-path.
 
-;; TODO: generalize the path
-(add-to-list 'load-path "~/.opam/4.02.3/share/emacs/site-lisp")
+(setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
+(add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
 (require 'ocp-indent)
 (require 'merlin)
 (add-hook 'tuareg-mode-hook 'merlin-mode t)
