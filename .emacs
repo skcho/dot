@@ -32,22 +32,18 @@
   (let ((inhibit-read-only t))
     (erase-buffer)))
 
-;; TODO: is there a simple way to set font and size?
-
 (defun set-font-size (size)
-  "Set font size"
-  (interactive "nInput size: ")
-  (let ((fs "fontset-default"))
-    (set-fontset-font fs 'latin "DejaVu Sans Mono")
-    (set-fontset-font fs 'hangul "나눔고딕")
-    (set-fontset-font fs
-		      (cons (decode-char 'ucs #x2293) (decode-char 'ucs #x2294))
-		      "DejaVu Sans Mono")
-    (set-face-attribute 'default nil :font fs :height (* size 10))))
+  "Set font size."
+  (interactive "nSize: ")
+  (set-face-attribute 'default nil :height (* size 10)))
 
 
 
 ;; Default settings
+
+(set-fontset-font "fontset-default" 'latin "DejaVu Sans Mono")
+(set-fontset-font "fontset-default" 'hangul "나눔고딕")
+(set-face-attribute 'default nil :font "fontset-default")
 
 (setq inhibit-startup-message t)
 (setq auto-save-default nil)
