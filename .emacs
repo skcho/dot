@@ -1,3 +1,5 @@
+;; Function definitions
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (defun select-next-window ()
@@ -30,6 +32,8 @@
   (let ((inhibit-read-only t))
     (erase-buffer)))
 
+;; TODO: is there a simple way to set font and size?
+
 (defun set-font-size (size)
   "Set font size"
   (interactive "nInput size: ")
@@ -41,7 +45,11 @@
 		      "DejaVu Sans Mono")
     (set-face-attribute 'default nil :font fs :height (* size 10))))
 
-(setq inhibit-startup-message t)	; No startup message
+
+
+;; Default settings
+
+(setq inhibit-startup-message t)
 (setq auto-save-default nil)
 (setq auto-save-list-file-name nil)
 (setq make-backup-files nil)
@@ -65,34 +73,29 @@
 
 (setq TeX-PDF-mode t)
 
-;; Remove a key map of [C-tab] in magit-mode.el for using it as a
-;; window selection in magit-mode.
-
-(global-set-key [(ctrl tab)] 'select-next-window)
-(global-set-key [(ctrl shift iso-lefttab)] 'select-previous-window)
-(global-set-key [(ctrl shift kp-tab)] 'select-previous-window)
-(global-set-key [(ctrl f4)] 'delete-window)
-(global-set-key "\C-x\C-k" 'kill-this-buffer)
-(global-set-key "\C-x\C-n" 'next-buffer)
-(global-set-key "\C-x\C-p" 'previous-buffer)
-(global-set-key "\C-x\C-b" 'ibuffer)
-
-(global-set-key "\C-c;" 'comment-region)
-(global-set-key "\C-c:" 'uncomment-region)
-
-(global-set-key [(control ?`)] 'up-down-case-char)
-
-(global-set-key "\M-Q" 'unfill-paragraph)
+(global-set-key (kbd "C-<tab>") 'select-next-window)
+(global-set-key (kbd "C-S-<tab>") 'select-previous-window)
+(global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+(global-set-key (kbd "C-x C-n") 'next-buffer)
+(global-set-key (kbd "C-x C-p") 'previous-buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-c ;") 'comment-region)
+(global-set-key (kbd "C-c :") 'uncomment-region)
+(global-set-key (kbd "C-`") 'up-down-case-char)
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
 
 (when window-system			; Disable suspend
-  (global-unset-key (kbd "C-z"))
-  (global-unset-key [(control x)(control z)]))
+  (global-unset-key (kbd "C-z")))
 
 (if (eq system-type 'darwin)
     (set-font-size 18)
   (set-font-size 14))
 
-;; Package: multiple-cursors
+
+
+;; Package settings
+
+;; multiple-cursors
 ;; See https://marmalade-repo.org/
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -100,13 +103,13 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-;; Package: expand-region
+;; expand-region
 ;; See https://marmalade-repo.org/
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; Package: ocp-indent & merlin
-;; They are sharing load-path.
+;; OPAM packages: ocp-indent & merlin
+;; NOTE: they share a load path.
 
 (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
 (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
@@ -117,18 +120,22 @@
 (setq merlin-use-auto-complete-mode 'easy)
 (setq merlin-command 'opam)
 
-;; Package: auto-complete
+;; auto-complete
 ;; See https://marmalade-repo.org/
-;; See also
-;; http://stackoverflow.com/questions/12053598/loading-packages-installed-through-package-el-in-emacs24
-;; to be sure why the initialization hooks.
+;; NOTE: the popup package is installed together.
 
-(add-hook 'after-init-hook 'auto-complete-init-hook)
-(defun auto-complete-init-hook ()
-  (require 'auto-complete-config)
-  (ac-config-default))
+(add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5")
+(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-1.4")
+(require 'auto-complete)
+(global-set-key (kbd "C-c <tab>") 'ac-complete-merlin)
 
-(load-file "~/tool/ProofGeneral/generic/proof-site.el")
+;; Color theme: dracula
+;; See https://github.com/zenorocha/dracula-theme
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'dracula t)
+
+;; Proof General
+;; See http://proofgeneral.inf.ed.ac.uk/
+
+(load-file "~/tool/ProofGeneral/generic/proof-site.el")
