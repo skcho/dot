@@ -69,8 +69,9 @@
 
 (setq TeX-PDF-mode t)
 
-(global-set-key (kbd "C-<tab>") 'select-next-window)
-(global-set-key (kbd "C-S-<tab>") 'select-previous-window)
+(global-set-key (kbd "<C-tab>") 'select-next-window)
+(global-set-key (kbd "<C-S-tab>") 'select-previous-window)
+(global-set-key (kbd "<C-iso-lefttab>") 'select-previous-window)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-x C-n") 'next-buffer)
 (global-set-key (kbd "C-x C-p") 'previous-buffer)
