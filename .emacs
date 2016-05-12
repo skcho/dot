@@ -136,3 +136,10 @@
 ;; See http://proofgeneral.inf.ed.ac.uk/
 
 (load-file "~/tool/ProofGeneral/generic/proof-site.el")
+
+;; company-coq
+;; See https://github.com/cpitclaudel/company-coq
+;; Load company-coq when opening Coq files
+
+(add-hook 'coq-mode-hook #'company-coq-mode)
+(put 'company-coq-fold 'disabled nil)
