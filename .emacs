@@ -135,7 +135,7 @@
 ;; Proof General
 ;; See http://proofgeneral.inf.ed.ac.uk/
 
-(load-file "~/tool/ProofGeneral/generic/proof-site.el")
+(load-file "~/tools/ProofGeneral/generic/proof-site.el")
 
 ;; company-coq
 ;; See https://github.com/cpitclaudel/company-coq
