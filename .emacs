@@ -42,7 +42,7 @@
 ;; Default settings
 
 (set-fontset-font "fontset-default" 'latin "DejaVu Sans Mono")
-(set-fontset-font "fontset-default" 'hangul "Noto Sans KR")
+(set-fontset-font "fontset-default" 'hangul "Noto Sans CJK KR")
 (set-face-attribute 'default nil :font "fontset-default")
 
 (setq inhibit-startup-message t)
