@@ -7,3 +7,9 @@ dot
     ln dot/.emacs ~/
     ln dot/key_repeat ~/tool/
     ln dracula-theme/emacs/dracula-theme.el .emacs.d/themes/
+
+`fonts.conf`: disables hinting in Gnome/Fedora.  Move it to
+`~/.config/fontconfig/`.  See
+[Font configuration](https://wiki.archlinux.org/index.php/font_configuration)
+for more details.
+
