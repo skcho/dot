@@ -1,3 +1,11 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+
+
 ;; Function definitions
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -41,7 +49,7 @@
 
 ;; Default settings
 
-(set-fontset-font "fontset-default" 'latin "DejaVu Sans Mono")
+(set-fontset-font "fontset-default" 'latin "Inconsolata")
 (set-fontset-font "fontset-default" 'hangul "Noto Sans CJK KR")
 (set-face-attribute 'default nil :font "fontset-default")
 
@@ -135,7 +143,7 @@
 ;; Proof General
 ;; See http://proofgeneral.inf.ed.ac.uk/
 
-(load-file "~/tools/ProofGeneral/generic/proof-site.el")
+(load-file "~/tool/ProofGeneral/generic/proof-site.el")
 
 ;; company-coq
 ;; See https://github.com/cpitclaudel/company-coq
