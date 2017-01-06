@@ -113,9 +113,10 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; OPAM packages: ocp-indent & merlin
+;; OPAM packages: tuareg, ocp-indent & merlin
 ;; NOTE: they share a load path.
 
+(load "~/.opam/4.03.0/share/emacs/site-lisp/tuareg-site-file")
 (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
 (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
 (require 'ocp-indent)
