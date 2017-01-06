@@ -114,7 +114,6 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; OPAM packages: tuareg, ocp-indent & merlin
-;; NOTE: they share a load path.
 
 (load "~/.opam/4.03.0/share/emacs/site-lisp/tuareg-site-file")
 (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
@@ -142,9 +141,9 @@
 (load-theme 'dracula t)
 
 ;; Proof General
-;; See http://proofgeneral.inf.ed.ac.uk/
+;; See https://proofgeneral.github.io/
 
-(load-file "~/tool/ProofGeneral/generic/proof-site.el")
+(load "~/.emacs.d/lisp/PG/generic/proof-site")
 
 ;; company-coq
 ;; See https://github.com/cpitclaudel/company-coq
@@ -152,3 +151,17 @@
 
 (add-hook 'coq-mode-hook #'company-coq-mode)
 (put 'company-coq-fold 'disabled nil)
+
+;; Reason mode
+;; See https://github.com/facebook/reason/tree/master/editorSupport/emacs
+
+(setq opam (substring (shell-command-to-string "opam config var prefix 2> /dev/null") 0 -1))
+(add-to-list 'load-path (concat opam "/share/emacs/site-lisp"))
+(setq refmt-command (concat opam "/bin/refmt"))
+(require 'reason-mode)
+(require 'merlin)
+(setq merlin-ac-setup t)
+(add-hook 'reason-mode-hook
+	  (lambda ()
+	    (add-hook 'before-save-hook 'refmt-before-save)
+	    (merlin-mode)))
