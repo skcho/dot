@@ -6,7 +6,7 @@
 
 
 
-;; Function definitions
+;; Functions
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -98,7 +98,24 @@
 
 
 
-;; Package settings
+;; Packages
+
+;; quelpa
+;; See https://github.com/quelpa/quelpa
+
+(unless (require 'quelpa nil t)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
+
+;; quelpa self-upgrade
+;; It raises an error currently.
+
+;; (if (require 'quelpa nil t)
+;;     (quelpa-self-upgrade)
+;;   (with-temp-buffer
+;;     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+;;     (eval-buffer)))
 
 ;; multiple-cursors
 ;; See https://marmalade-repo.org/
@@ -153,15 +170,27 @@
 (put 'company-coq-fold 'disabled nil)
 
 ;; Reason mode
-;; See https://github.com/facebook/reason/tree/master/editorSupport/emacs
+;; See https://github.com/arichiardi/reason-mode
 
-(setq opam (substring (shell-command-to-string "opam config var prefix 2> /dev/null") 0 -1))
-(add-to-list 'load-path (concat opam "/share/emacs/site-lisp"))
-(setq refmt-command (concat opam "/bin/refmt"))
-(require 'reason-mode)
-(require 'merlin)
-(setq merlin-ac-setup t)
-(add-hook 'reason-mode-hook
-	  (lambda ()
-	    (add-hook 'before-save-hook 'refmt-before-save)
-	    (merlin-mode)))
+;; Reason mode using quelpa
+;; It raises an error currently.
+
+;; (quelpa '(reason-mode :repo "arichiardi/reason-mode" :fetcher github :stable t))
+
+;; Reason mode by manual install
+
+(defun chomp-end (str)
+  "Chomp tailing whitespace from STR."
+  (replace-regexp-in-string (rx (* (any " \t\n")) eos)
+                            ""
+                            str))
+
+(let ((support-base-dir (concat (replace-regexp-in-string "refmt" "" (file-truename (chomp-end (shell-command-to-string "which refmt")))) ".."))
+      (merlin-base-dir (concat (replace-regexp-in-string "ocamlmerlin" "" (file-truename (chomp-end (shell-command-to-string "which ocamlmerlin")))) "..")))
+  ;; Add npm merlin.el to the emacs load path and tell emacs where to find ocamlmerlin
+  (add-to-list 'load-path (concat merlin-base-dir "/share/emacs/site-lisp/"))
+  (setq merlin-command (concat merlin-base-dir "/bin/ocamlmerlin"))
+
+  ;; Add npm reason-mode to the emacs load path and tell emacs where to find refmt
+  (add-to-list 'load-path (concat support-base-dir "/share/emacs/site-lisp"))
+  (setq refmt-command (concat support-base-dir "/bin/refmt")))
