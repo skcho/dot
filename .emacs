@@ -203,5 +203,5 @@
 ;; OCamlFormat
 ;; https://github.com/ocaml-ppx/ocamlformat
 
-(load (concat opam "/share/emacs/site-lisp/ocamlformat"))
+(load (concat opam-share "/emacs/site-lisp/ocamlformat"))
 (add-hook 'before-save-hook 'ocamlformat-before-save)
