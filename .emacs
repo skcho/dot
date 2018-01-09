@@ -51,6 +51,7 @@
 
 (set-fontset-font "fontset-default" 'latin "Inconsolata")
 (set-fontset-font "fontset-default" 'hangul "Noto Sans CJK KR")
+(set-fontset-font "fontset-default" 'japanese-jisx0208 "Noto Sans CJK JP")
 (set-face-attribute 'default nil :font "fontset-default")
 
 (setq inhibit-startup-message t)
