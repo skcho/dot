@@ -5,7 +5,6 @@
 (package-initialize)
 
 
-
 ;; Functions
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -44,7 +43,6 @@
   "Set font size."
   (interactive "nSize: ")
   (set-face-attribute 'default nil :height (* size 10)))
-
 
 
 ;; Default settings
@@ -98,7 +96,6 @@
   (set-font-size 14))
 
 
-
 ;; Packages
 
 ;; quelpa
@@ -119,7 +116,7 @@
 ;;     (eval-buffer)))
 
 ;; multiple-cursors
-;; See https://marmalade-repo.org/
+;; https://marmalade-repo.org/
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -127,7 +124,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; expand-region
-;; See https://marmalade-repo.org/
+;; https://marmalade-repo.org/
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
@@ -144,7 +141,7 @@
 (setq merlin-command 'opam)
 
 ;; auto-complete
-;; See https://marmalade-repo.org/
+;; https://marmalade-repo.org/
 ;; NOTE: the popup package is installed together.
 
 (add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5")
@@ -153,25 +150,25 @@
 (global-set-key (kbd "C-c <tab>") 'ac-complete-merlin)
 
 ;; Color theme: dracula
-;; See https://github.com/zenorocha/dracula-theme
+;; https://github.com/zenorocha/dracula-theme
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'dracula t)
 
 ;; Proof General
-;; See https://proofgeneral.github.io/
+;; https://proofgeneral.github.io/
 
 (load "~/.emacs.d/lisp/PG/generic/proof-site")
 
 ;; company-coq
-;; See https://github.com/cpitclaudel/company-coq
+;; https://github.com/cpitclaudel/company-coq
 ;; Load company-coq when opening Coq files
 
 (add-hook 'coq-mode-hook #'company-coq-mode)
 (put 'company-coq-fold 'disabled nil)
 
 ;; Reason mode
-;; See https://github.com/arichiardi/reason-mode
+;; https://github.com/arichiardi/reason-mode
 
 ;; Reason mode using quelpa
 ;; It raises an error currently.
@@ -197,8 +194,15 @@
   (setq refmt-command (concat support-base-dir "/bin/refmt")))
 
 ;; Disable Eshell's scroll feature
-;; from https://emacs.stackexchange.com/questions/28819/eshell-goes-to-the-bottom-of-the-page-after-executing-a-command
+;; https://emacs.stackexchange.com/questions/28819/eshell-goes-to-the-bottom-of-the-page-after-executing-a-command
+
 (add-hook 'eshell-mode-hook
           (defun chunyang-eshell-mode-setup ()
             (remove-hook 'eshell-output-filter-functions
                          'eshell-postoutput-scroll-to-bottom)))
+
+;; OCamlFormat
+;; https://github.com/ocaml-ppx/ocamlformat
+
+(load (concat opam-share "/emacs/site-lisp/ocamlformat"))
+(add-hook 'before-save-hook 'ocamlformat-before-save)
