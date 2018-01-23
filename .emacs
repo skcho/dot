@@ -92,6 +92,8 @@
 (when window-system			; Disable suspend
   (global-unset-key (kbd "C-z")))
 
+(setq ring-bell-function 'ignore)       ; Disable bell
+
 (if (eq system-type 'darwin)
     (set-font-size 18)
   (set-font-size 14))
