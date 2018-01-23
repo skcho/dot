@@ -5,8 +5,7 @@
 (package-initialize)
 
 
-
-;; Function definitions
+;; Functions
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -46,11 +45,11 @@
   (set-face-attribute 'default nil :height (* size 10)))
 
 
-
 ;; Default settings
 
 (set-fontset-font "fontset-default" 'latin "Inconsolata")
 (set-fontset-font "fontset-default" 'hangul "Noto Sans CJK KR")
+(set-fontset-font "fontset-default" 'japanese-jisx0208 "Noto Sans CJK JP")
 (set-face-attribute 'default nil :font "fontset-default")
 
 (setq inhibit-startup-message t)
@@ -99,11 +98,27 @@
   (set-font-size 14))
 
 
+;; Packages
 
-;; Package settings
+;; quelpa
+;; See https://github.com/quelpa/quelpa
+
+(unless (require 'quelpa nil t)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
+
+;; quelpa self-upgrade
+;; It raises an error currently.
+
+;; (if (require 'quelpa nil t)
+;;     (quelpa-self-upgrade)
+;;   (with-temp-buffer
+;;     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+;;     (eval-buffer)))
 
 ;; multiple-cursors
-;; See https://marmalade-repo.org/
+;; https://marmalade-repo.org/
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -111,7 +126,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; expand-region
-;; See https://marmalade-repo.org/
+;; https://marmalade-repo.org/
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
@@ -128,7 +143,7 @@
 (setq merlin-command 'opam)
 
 ;; auto-complete
-;; See https://marmalade-repo.org/
+;; https://marmalade-repo.org/
 ;; NOTE: the popup package is installed together.
 
 (add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5")
@@ -137,33 +152,59 @@
 (global-set-key (kbd "C-c <tab>") 'ac-complete-merlin)
 
 ;; Color theme: dracula
-;; See https://github.com/zenorocha/dracula-theme
+;; https://github.com/zenorocha/dracula-theme
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'dracula t)
 
 ;; Proof General
-;; See https://proofgeneral.github.io/
+;; https://proofgeneral.github.io/
 
 (load "~/.emacs.d/lisp/PG/generic/proof-site")
 
 ;; company-coq
-;; See https://github.com/cpitclaudel/company-coq
+;; https://github.com/cpitclaudel/company-coq
 ;; Load company-coq when opening Coq files
 
 (add-hook 'coq-mode-hook #'company-coq-mode)
 (put 'company-coq-fold 'disabled nil)
 
 ;; Reason mode
-;; See https://github.com/facebook/reason/tree/master/editorSupport/emacs
+;; https://github.com/arichiardi/reason-mode
 
-(setq opam (substring (shell-command-to-string "opam config var prefix 2> /dev/null") 0 -1))
-(add-to-list 'load-path (concat opam "/share/emacs/site-lisp"))
-(setq refmt-command (concat opam "/bin/refmt"))
-(require 'reason-mode)
-(require 'merlin)
-(setq merlin-ac-setup t)
-(add-hook 'reason-mode-hook
-	  (lambda ()
-	    (add-hook 'before-save-hook 'refmt-before-save)
-	    (merlin-mode)))
+;; Reason mode using quelpa
+;; It raises an error currently.
+
+;; (quelpa '(reason-mode :repo "arichiardi/reason-mode" :fetcher github :stable t))
+
+;; Reason mode by manual install
+
+(defun chomp-end (str)
+  "Chomp tailing whitespace from STR."
+  (replace-regexp-in-string (rx (* (any " \t\n")) eos)
+                            ""
+                            str))
+
+(let ((support-base-dir (concat (replace-regexp-in-string "refmt" "" (file-truename (chomp-end (shell-command-to-string "which refmt")))) ".."))
+      (merlin-base-dir (concat (replace-regexp-in-string "ocamlmerlin" "" (file-truename (chomp-end (shell-command-to-string "which ocamlmerlin")))) "..")))
+  ;; Add npm merlin.el to the emacs load path and tell emacs where to find ocamlmerlin
+  (add-to-list 'load-path (concat merlin-base-dir "/share/emacs/site-lisp/"))
+  (setq merlin-command (concat merlin-base-dir "/bin/ocamlmerlin"))
+
+  ;; Add npm reason-mode to the emacs load path and tell emacs where to find refmt
+  (add-to-list 'load-path (concat support-base-dir "/share/emacs/site-lisp"))
+  (setq refmt-command (concat support-base-dir "/bin/refmt")))
+
+;; Disable Eshell's scroll feature
+;; https://emacs.stackexchange.com/questions/28819/eshell-goes-to-the-bottom-of-the-page-after-executing-a-command
+
+(add-hook 'eshell-mode-hook
+          (defun chunyang-eshell-mode-setup ()
+            (remove-hook 'eshell-output-filter-functions
+                         'eshell-postoutput-scroll-to-bottom)))
+
+;; OCamlFormat
+;; https://github.com/ocaml-ppx/ocamlformat
+
+(load (concat opam-share "/emacs/site-lisp/ocamlformat"))
+(add-hook 'before-save-hook 'ocamlformat-before-save)
