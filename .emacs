@@ -118,7 +118,7 @@
 ;;     (eval-buffer)))
 
 ;; multiple-cursors
-;; https://marmalade-repo.org/
+;; https://github.com/magnars/multiple-cursors.el
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -126,7 +126,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; expand-region
-;; https://marmalade-repo.org/
+;; https://github.com/magnars/expand-region.el
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
@@ -143,7 +143,6 @@
 (setq merlin-command 'opam)
 
 ;; auto-complete
-;; https://marmalade-repo.org/
 ;; NOTE: the popup package is installed together.
 
 (add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5")
