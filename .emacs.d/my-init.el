@@ -135,15 +135,16 @@ working directory, when opening a file of a specific git commit."
 
 ;; OPAM packages: tuareg, ocp-indent & merlin
 
-(setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
-(load (concat opam-share "/emacs/site-lisp/tuareg-site-file"))
-(add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
-(require 'ocp-indent)
-(require 'merlin)
-(add-hook 'tuareg-mode-hook 'merlin-mode t)
-(add-hook 'caml-mode-hook 'merlin-mode t)
-(setq merlin-use-auto-complete-mode 'easy)
-(setq merlin-command 'opam)
+(when my-init-ocaml-enabled
+  (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
+  (load (concat opam-share "/emacs/site-lisp/tuareg-site-file"))
+  (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+  (require 'ocp-indent)
+  (require 'merlin)
+  (add-hook 'tuareg-mode-hook 'merlin-mode t)
+  (add-hook 'caml-mode-hook 'merlin-mode t)
+  (setq merlin-use-auto-complete-mode 'easy)
+  (setq merlin-command 'opam))
 
 ;; auto-complete
 ;; NOTE: the popup package is installed together.
@@ -161,34 +162,37 @@ working directory, when opening a file of a specific git commit."
 ;; https://github.com/cpitclaudel/company-coq
 ;; Load company-coq when opening Coq files
 
-(add-hook 'coq-mode-hook #'company-coq-mode)
-(put 'company-coq-fold 'disabled nil)
+(when my-init-coq-enabled
+  (add-hook 'coq-mode-hook #'company-coq-mode)
+  (put 'company-coq-fold 'disabled nil))
 
 ;; OCamlFormat
 ;; https://github.com/ocaml-ppx/ocamlformat
 
-(load (concat opam-share "/emacs/site-lisp/ocamlformat"))
-(add-hook 'before-save-hook 'ocamlformat-before-save)
+(when my-init-ocaml-enabled
+  (load (concat opam-share "/emacs/site-lisp/ocamlformat"))
+  (add-hook 'before-save-hook 'ocamlformat-before-save))
 
 ;; TypeScript
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
+(when my-init-typescript-enabled
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    ;; company is an optional dependency. You have to
+    ;; install it separately via package-install
+    ;; `M-x package-install [ret] company`
+    (company-mode +1))
 
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
+  ;; aligns annotation to the right hand side
+  (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+  ;; formats the buffer before saving
+  (add-hook 'before-save-hook 'tide-format-before-save)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 ;; JavaScript
 (add-hook 'js-mode-hook
