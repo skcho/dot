@@ -115,7 +115,7 @@ working directory, when opening a file of a specific git commit."
 (setq ring-bell-function 'ignore)       ; Disable bell
 
 (if (eq system-type 'darwin)
-    (set-font-size 18)
+    (set-font-size 15)
   (set-font-size 12))
 
 
