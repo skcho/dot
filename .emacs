@@ -100,23 +100,6 @@
 
 ;; Packages
 
-;; quelpa
-;; See https://github.com/quelpa/quelpa
-
-(unless (require 'quelpa nil t)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
-
-;; quelpa self-upgrade
-;; It raises an error currently.
-
-;; (if (require 'quelpa nil t)
-;;     (quelpa-self-upgrade)
-;;   (with-temp-buffer
-;;     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-;;     (eval-buffer)))
-
 ;; multiple-cursors
 ;; https://github.com/magnars/multiple-cursors.el
 
