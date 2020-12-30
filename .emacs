@@ -164,11 +164,6 @@ working directory, when opening a file of a specific git commit."
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'dracula t)
 
-;; Proof General
-;; https://proofgeneral.github.io/
-
-(load "~/.emacs.d/lisp/PG/generic/proof-site")
-
 ;; company-coq
 ;; https://github.com/cpitclaudel/company-coq
 ;; Load company-coq when opening Coq files
