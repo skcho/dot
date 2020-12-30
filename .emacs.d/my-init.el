@@ -1,9 +1,4 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
-
+;; NOTE: Make sure running package-initialize before load this file.
 
 ;; Functions
 
@@ -153,8 +148,6 @@ working directory, when opening a file of a specific git commit."
 ;; auto-complete
 ;; NOTE: the popup package is installed together.
 
-(add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5")
-(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-1.4")
 (require 'auto-complete)
 (global-set-key (kbd "C-c <tab>") 'ac-complete-merlin)
 
