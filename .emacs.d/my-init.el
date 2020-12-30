@@ -172,7 +172,9 @@ working directory, when opening a file of a specific git commit."
 ;; https://github.com/ocaml-ppx/ocamlformat
 
 (when my-init-ocaml-enabled
-  (load (concat opam-share "/emacs/site-lisp/ocamlformat"))
+  (if my-init-ocamlformat-el
+      (load-file my-init-ocamlformat-el)
+    (load (concat opam-share "/emacs/site-lisp/ocamlformat")))
   (add-hook 'before-save-hook 'ocamlformat-before-save))
 
 ;; TypeScript
