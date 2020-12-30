@@ -44,6 +44,31 @@
   (interactive "nSize: ")
   (set-face-attribute 'default nil :height (* size 10)))
 
+(defun real ()
+  "Replace the current buffer with the corresponding file of \
+working directory, when opening a file of a specific git commit."
+  (defun find-git-root ()
+    (defun parent-directory (dir)
+      (unless (equal "/" dir)
+        (file-name-directory (directory-file-name dir))))
+    (defun find-git-root-rec (dir)
+      (if (file-exists-p (concat dir ".git"))
+          dir
+        (find-git-root-rec (parent-directory dir))))
+    (find-git-root-rec (symbol-value 'default-directory)))
+  (defun find-original-path (s)
+    (substring s 0 (string-match "\\.~" s)))
+  (interactive)
+  (let* ((old-point (point))
+         (old-buffer (buffer-name))
+         (git-root (find-git-root))
+         (file-path (find-original-path old-buffer))
+         (new-file (concat git-root file-path)))
+    (when (file-exists-p new-file)
+      (find-file new-file)
+      (goto-char old-point)
+      (kill-buffer old-buffer))))
+
 
 ;; Default settings
 
