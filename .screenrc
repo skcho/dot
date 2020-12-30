@@ -1,2 +1,13 @@
-# See http://vertstudios.com/blog/screenrc-simple-workflow/
+# http://vertstudios.com/blog/screenrc-simple-workflow/
+
+# skip the startup message
+startup_message off
+
+# Display a caption string below, appearing like tabs and
+# displaying the window number and application name (by default).
 caption always
+caption string "%{kw}%-w%{wr}%n %t%{-}%+w"
+
+
+# https://superuser.com/questions/882759/gnu-screen-utmp-slot-not-found
+deflogin off
