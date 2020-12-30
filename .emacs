@@ -95,7 +95,7 @@
 
 (if (eq system-type 'darwin)
     (set-font-size 18)
-  (set-font-size 14))
+  (set-font-size 12))
 
 
 ;; Packages
