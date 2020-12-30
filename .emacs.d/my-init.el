@@ -145,7 +145,8 @@ working directory, when opening a file of a specific git commit."
   (add-hook 'tuareg-mode-hook 'merlin-mode t)
   (add-hook 'caml-mode-hook 'merlin-mode t)
   (setq merlin-use-auto-complete-mode 'easy)
-  (setq merlin-command 'opam))
+  (setq merlin-command 'opam)
+  (setq merlin-locate-preference 'ml))
 
 ;; auto-complete
 ;; NOTE: the popup package is installed together.
