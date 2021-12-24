@@ -199,5 +199,14 @@ working directory, when opening a file of a specific git commit."
   (add-hook 'typescript-mode-hook #'setup-tide-mode))
 
 ;; JavaScript
-(add-hook 'js-mode-hook
-	  (lambda () (setq-default indent-tabs-mode nil)))
+(when my-init-javascript-enabled
+  (add-hook 'js-mode-hook
+            (lambda () (setq-default indent-tabs-mode nil))))
+
+;; PHP
+(when my-init-php-enabled
+  (add-to-list 'load-path "~/.emacs.d/php-cs-fixer-el/")
+  (require 'php-cs-fixer)
+  (setq php-cs-fixer-command "~/.emacs.d/php-cs-fixer")
+  (setq php-cs-fixer-rules-level-part-options '("@PSR12"))
+  (add-hook 'before-save-hook 'php-cs-fixer-before-save))
