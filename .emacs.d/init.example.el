@@ -8,5 +8,5 @@
 (setq my-init-ocaml-enabled t)
 (setq my-init-ocamlformat-el nil)
 (setq my-init-php-enabled nil)
-(setq my-init-typescript-enabled t)
+(setq my-init-typescript-enabled nil)
 (load "~/.emacs.d/my-init")
