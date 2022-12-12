@@ -196,17 +196,19 @@ working directory, when opening a file of a specific git commit."
 
   ;; formats the buffer before saving
   (add-hook 'before-save-hook 'tide-format-before-save)
-  (add-hook 'typescript-mode-hook #'setup-tide-mode))
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
-;; TSX
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
-;; enable typescript-tslint checker
-;(flycheck-add-mode 'typescript-tslint 'web-mode)
+  ;; TSX
+  (require 'web-mode)
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+		(setup-tide-mode))))
+
+  ;; enable typescript-tslint checker
+  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+  )
 
 ;; JavaScript
 (when my-init-javascript-enabled
@@ -219,16 +221,16 @@ working directory, when opening a file of a specific git commit."
   (require 'php-cs-fixer)
   (setq php-cs-fixer-command "~/.emacs.d/php-cs-fixer")
   (setq php-cs-fixer-rules-level-part-options '("@PSR12"))
-  (add-hook 'before-save-hook 'php-cs-fixer-before-save))
+  (add-hook 'before-save-hook 'php-cs-fixer-before-save)
 
-;; Add lsp or lsp-deferred function call to functions for your php-mode customization
-(defun init-php-mode ()
-  (lsp-deferred))
+  ;; Add lsp or lsp-deferred function call to functions for your php-mode customization
+  (defun init-php-mode ()
+    (lsp-deferred))
 
-(with-eval-after-load 'php-mode
-  ;; If phpactor command is not installed as global, write the full path
-  ;; (custom-set-variables '(lsp-phpactor-path "/path/to/phpactor"))
-  (add-hook 'php-mode-hook #'init-php-mode))
+  (with-eval-after-load 'php-mode
+    ;; If phpactor command is not installed as global, write the full path
+    ;; (custom-set-variables '(lsp-phpactor-path "/path/to/phpactor"))
+    (add-hook 'php-mode-hook #'init-php-mode)))
 
 ;; Json
 (add-hook 'json-mode-hook
