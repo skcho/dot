@@ -193,6 +193,8 @@
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
 		(setup-tide-mode))))
 
+  (setq web-mode-enable-auto-quoting nil)
+
   ;; enable typescript-tslint checker
   ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
   )
