@@ -55,8 +55,9 @@
 ;; Default settings
 
 (when my-init-fontset-enabled
-  (set-fontset-font "fontset-default" 'latin "D2Coding")
-  (set-fontset-font "fontset-default" 'hangul "Noto Sans CJK KR")
+  (set-fontset-font "fontset-default" 'latin "Cousine")
+  (set-fontset-font "fontset-default" 'hangul "NanumBarunGothic")
+  (set-fontset-font "fontset-default" 'symbol "Noto Color Emoji")
   (set-fontset-font "fontset-default" 'japanese-jisx0208 "Noto Sans CJK JP")
   (set-face-attribute 'default nil :font "fontset-default"))
 
