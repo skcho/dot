@@ -9,4 +9,5 @@
 (setq my-init-ocamlformat-el nil)
 (setq my-init-php-enabled nil)
 (setq my-init-typescript-enabled nil)
+(setq my-init-rust-enabled nil)
 (load "~/.emacs.d/my-init")

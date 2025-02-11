@@ -228,3 +228,13 @@
           (lambda ()
             (make-local-variable 'js-indent-level)
             (setq js-indent-level 2)))
+
+;; Rust
+(when my-init-rust-enbled
+  (require 'lsp-mode)
+  (add-hook 'rust-mode-hook #'lsp)
+  (setq warning-minimum-level :error)
+  ;; This is too slow in X11. :(
+  ;; (setq lsp-eldoc-render-all t)
+  (define-key lsp-mode-map (kbd "C-c C-l") lsp-command-map)
+  (setq lsp-file-watch-threshold 4000))
