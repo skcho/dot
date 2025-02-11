@@ -106,6 +106,7 @@
     (set-font-size 15)
   (set-font-size 12))
 
+(setq-default indent-tabs-mode nil)
 
 ;; Packages
 
