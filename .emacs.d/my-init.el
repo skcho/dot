@@ -230,7 +230,7 @@
             (setq js-indent-level 2)))
 
 ;; Rust
-(when my-init-rust-enbled
+(when my-init-rust-enabled
   (require 'lsp-mode)
   (add-hook 'rust-mode-hook #'lsp)
   (setq warning-minimum-level :error)
