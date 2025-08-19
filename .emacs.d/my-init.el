@@ -193,7 +193,7 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-		(setup-tide-mode))))
+                (setup-tide-mode))))
 
   (setq web-mode-enable-auto-quoting nil)
 
@@ -234,7 +234,49 @@
   (require 'lsp-mode)
   (add-hook 'rust-mode-hook #'lsp)
   (setq warning-minimum-level :error)
-  ;; This is too slow in X11. :(
-  ;; (setq lsp-eldoc-render-all t)
+  (setq lsp-eldoc-render-all t)
   (define-key lsp-mode-map (kbd "C-c C-l") lsp-command-map)
-  (setq lsp-file-watch-threshold 4000))
+  (setq lsp-rust-analyzer-cargo-watch-enable nil)
+  (setq rust-format-on-save t)
+  )
+
+;; Python
+(when my-init-python-enabled
+  (require 'lsp-mode)
+  (add-hook 'python-mode-hook #'lsp)
+  (use-package lazy-ruff
+    :ensure t
+    :bind (("C-c f" . lazy-ruff-lint-format-dwim)) ;; keybinding
+    :config (lazy-ruff-global-mode t)) ;; Enable the lazy-ruff minor mode globally
+  )
+
+;; Ivy
+(when my-init-ivy-enabled
+  (ivy-mode)
+  (setopt ivy-use-virtual-buffers t)
+  (setopt enable-recursive-minibuffers t)
+  ;; Enable this if you want `swiper' to use it:
+  ;; (setopt search-default-mode #'char-fold-to-regexp)
+  (keymap-global-set "C-s" #'swiper-isearch)
+  (keymap-global-set "C-c C-r" #'ivy-resume)
+  (keymap-global-set "<f6>" #'ivy-resume)
+  (keymap-global-set "M-x" #'counsel-M-x)
+  (keymap-global-set "C-x C-f" #'counsel-find-file)
+  (keymap-global-set "<f1> f" #'counsel-describe-function)
+  (keymap-global-set "<f1> v" #'counsel-describe-variable)
+  (keymap-global-set "<f1> o" #'counsel-describe-symbol)
+  (keymap-global-set "<f1> l" #'counsel-find-library)
+  (keymap-global-set "<f2> i" #'counsel-info-lookup-symbol)
+  (keymap-global-set "<f2> u" #'counsel-unicode-char)
+  (keymap-global-set "C-c g" #'counsel-git)
+  (keymap-global-set "C-c j" #'counsel-git-grep)
+  (keymap-global-set "C-c k" #'counsel-ag)
+  (keymap-global-set "C-x l" #'counsel-locate)
+  (keymap-global-set "C-S-o" #'counsel-rhythmbox)
+  (keymap-set minibuffer-local-map "C-r" #'counsel-minibuffer-history))
+
+;; Projectile
+(when my-init-projectile-enabled
+  (projectile-mode +1)
+  ;; Recommended keymap prefix on Windows/Linux
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
