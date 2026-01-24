@@ -55,8 +55,8 @@
 ;; Default settings
 
 (when my-init-fontset-enabled
-  (set-fontset-font "fontset-default" 'latin "Cousine")
-  (set-fontset-font "fontset-default" 'hangul "NanumBarunGothic")
+  (set-fontset-font "fontset-default" 'latin "JetBrainsMono")
+  (set-fontset-font "fontset-default" 'hangul "Noto Sans Mono KR")
   (set-fontset-font "fontset-default" 'symbol "Noto Color Emoji")
   (set-fontset-font "fontset-default" 'japanese-jisx0208 "Noto Sans CJK JP")
   (set-face-attribute 'default nil :font "fontset-default"))
@@ -104,7 +104,7 @@
 
 (if (eq system-type 'darwin)
     (set-font-size 15)
-  (set-font-size 12))
+  (set-font-size 13))
 
 (setq-default indent-tabs-mode nil)
 
@@ -210,7 +210,6 @@
 
 ;; PHP
 (when my-init-php-enabled
-  (add-to-list 'load-path "~/.emacs.d/php-cs-fixer-el/")
   (require 'php-cs-fixer)
   (setq php-cs-fixer-command "~/.emacs.d/php-cs-fixer")
   (setq php-cs-fixer-rules-level-part-options '("@PSR12"))
