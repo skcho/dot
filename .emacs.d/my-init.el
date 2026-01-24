@@ -114,9 +114,11 @@
 ;; https://github.com/magnars/multiple-cursors.el
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-c C-c C") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c >") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c <") 'mc/mark-previous-like-this)
 
 ;; expand-region
 ;; https://github.com/magnars/expand-region.el
@@ -236,8 +238,11 @@
   (setq warning-minimum-level :error)
   (setq lsp-eldoc-render-all t)
   (define-key lsp-mode-map (kbd "C-c C-l") lsp-command-map)
+  (setq lsp-enable-file-watchers nil)
   (setq lsp-rust-analyzer-cargo-watch-enable nil)
+  (setq lsp-rust-analyzer-rustc-source "discover")
   (setq rust-format-on-save t)
+  (setq rust-rustfmt-switches '("--edition" "2024"))
   )
 
 ;; Python
@@ -256,12 +261,17 @@
   (setopt ivy-use-virtual-buffers t)
   (setopt enable-recursive-minibuffers t)
   ;; Enable this if you want `swiper' to use it:
-  ;; (setopt search-default-mode #'char-fold-to-regexp)
+  (setopt search-default-mode #'char-fold-to-regexp)
   (keymap-global-set "C-s" #'swiper-isearch)
   (keymap-global-set "C-c C-r" #'ivy-resume)
   (keymap-global-set "<f6>" #'ivy-resume)
   (keymap-global-set "M-x" #'counsel-M-x)
+
+  ;; Shame! If you want to create a NEW file, write a file name, then
+  ;; C-M-j.  See the "C-M-j (ivy-immediate-done)" section in
+  ;; https://elpa.gnu.org/devel/doc/ivy.html .
   (keymap-global-set "C-x C-f" #'counsel-find-file)
+
   (keymap-global-set "<f1> f" #'counsel-describe-function)
   (keymap-global-set "<f1> v" #'counsel-describe-variable)
   (keymap-global-set "<f1> o" #'counsel-describe-symbol)
@@ -273,7 +283,11 @@
   (keymap-global-set "C-c k" #'counsel-ag)
   (keymap-global-set "C-x l" #'counsel-locate)
   (keymap-global-set "C-S-o" #'counsel-rhythmbox)
-  (keymap-set minibuffer-local-map "C-r" #'counsel-minibuffer-history))
+  (keymap-set minibuffer-local-map "C-r" #'counsel-minibuffer-history)
+  (defun my-ivy-height-ratio (frame)
+    "Set `ivy-height' to proportion of FRAME height."
+    (setq ivy-height (/ (frame-height frame) 2)))
+  (add-hook 'window-size-change-functions #'my-ivy-height-ratio))
 
 ;; Projectile
 (when my-init-projectile-enabled
