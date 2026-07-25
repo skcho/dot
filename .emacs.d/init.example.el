@@ -13,4 +13,5 @@
 (setq my-init-python-enabled nil)
 (setq my-init-ivy-enabled nil)
 (setq my-init-projectile-enabled nil)
+(setq my-init-olivetti-enabled nil)
 (load "~/.emacs.d/my-init")

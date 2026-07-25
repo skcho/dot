@@ -293,3 +293,10 @@
   (projectile-mode +1)
   ;; Recommended keymap prefix on Windows/Linux
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+;; Olivetty mode
+(when my-init-olivetti-enabled
+  (add-hook 'olivetti-mode-hook
+            (lambda ()
+              (setq olivetti-body-width 100)
+              (olivetti-reset-all-windows))))
